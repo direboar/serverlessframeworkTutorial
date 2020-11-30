@@ -13,12 +13,19 @@
 
 service: myservice
 # app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
+app: hello
+org: direboar
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 frameworkVersion: '2'
+
+plugins:
+  - serverless-layers
+
+custom:
+  serverless-layers:
+    layersDeploymentBucket: lambda-layers-deploy-minokuba
 
 provider:
   name: aws
@@ -63,10 +70,19 @@ functions:
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
-#    events:
-#      - http:
-#          path: users/create
-#          method: get
+    events:
+     - http:
+         path: hello
+         method: get
+  goodby:
+    handler: handler.goodby
+#    The following are a few example events you can configure
+#    NOTE: Please make sure to change your handler code to work with those events
+#    Check the event documentation for details
+    events:
+     - http:
+         path: goodby
+         method: get
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
@@ -111,3 +127,4 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+
